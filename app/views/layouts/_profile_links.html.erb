@@ -1,6 +1,8 @@
 <ul id="<%= data %>" class="dropdown-content">
+  <li><%= link_to 'Profilo', user_path(current_user) %></li>
+  <li><%= link_to 'Modifica profilo', edit_user_path(current_user) %></li>
   <li class="divider"></li>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+  <li><%= link_to 'Modifica account', edit_user_registration_path %></li>
   <li class="divider"></li>
   <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
 </ul>
