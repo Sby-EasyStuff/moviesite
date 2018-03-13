@@ -1,12 +1,12 @@
 <header>
-  <div class="navbar-fixed">
+  <div class="navbar-fixed blue accent-1">
     <% if user_signed_in? %>
       <%= render 'layouts/profile_links', data: 'profile-menu' %>
       <%= render 'layouts/profile_links', data: 'mob-profile-menu' %>
     <% end %>
 
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper blue accent-1">
         <%= link_to 'MovieSite', root_path, class: 'brand-logo' %>
         <a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 
