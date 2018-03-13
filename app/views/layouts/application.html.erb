@@ -1,16 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Moviesite</title>
+    <title>MovieSite</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+
+    <% if notice %>
+      <div class="row">
+        <div class="alert">
+          <div class="chip green white-text z-depth-3">
+            <%= notice %>
+            <i class="close material-icons">close</i>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="row">
+        <div class="alert">
+          <div class="chip red white-text z-depth-3">
+            <%= alert %>
+            <i class="close material-icons">close</i>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <main>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+
+    <script type="text/javascript">
+      $(document).on('turbolinks:load', function(){
+        setTimeout(function(){
+          $('.alert').remove();
+        }, 5000);
+      })
+    </script>
+
+    <% if cookies && cookies[:eat_cookie] != 'gnam' %>
+      <div class="toast toast-cookie-banner">
+        <div>
+          In order to make this web app work we use <a href="https://en.wikipedia.org/wiki/HTTP_cookie">cookies</a>.
+          But don't be affraid our cookies are gluten-free, sugar-free and we do not use palm oil.
+          <button class="btn-flat" id="accept-cookie"><strong>Agree</strong></button>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>

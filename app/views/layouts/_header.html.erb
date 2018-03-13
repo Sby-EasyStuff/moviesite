@@ -1,0 +1,23 @@
+<header>
+  <div class="navbar-fixed">
+    <% if user_signed_in? %>
+      <%= render 'layouts/profile_links', data: 'profile-menu' %>
+      <%= render 'layouts/profile_links', data: 'mob-profile-menu' %>
+    <% end %>
+
+    <nav>
+      <div class="nav-wrapper">
+        <%= link_to 'MovieSite', root_path, class: 'brand-logo' %>
+        <a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        <ul class="right hide-on-med-and-down">
+          <%= render 'layouts/menu_links', data: 'profile-menu' %>
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
+          <%= render 'layouts/menu_links', data: 'mob-profile-menu' %>
+        </ul>
+
+      </div>
+    </nav>
+  </div>
+</header>
