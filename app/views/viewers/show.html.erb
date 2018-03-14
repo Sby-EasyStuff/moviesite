@@ -1,0 +1,32 @@
+<% if current_user != @viewer %>
+  <h1>Benvenuto nel profilo di <%= @viewer.name %></h1>
+<% end %>
+
+<div class="row">
+  <div class="col s6">
+    <table class="responsive-table">
+      <tbody>
+        <tr>
+          <td><b>Nome:</b></td>
+          <td><%= @viewer.name %></td>
+        </tr>
+        <tr>
+          <td><b>Email:</b></td>
+          <td><%= @viewer.email %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% if current_user == @viewer %>
+      <%= link_to "Edit", edit_viewer_path(current_user), class: "wave-light wave-effect btn blue accent-1" %>
+    <% end %>
+  </div>
+  <% if !@viewer.photo.blank? %>
+  <div class="col s6">
+    <div class="row">
+      <div class="col s12">
+        <%= image_tag @viewer.photo, class: "responsive-image" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

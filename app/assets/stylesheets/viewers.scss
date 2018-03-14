@@ -1,0 +1,24 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "materialize";
+.card-profile-image {
+  width: 60px;
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  left: 20px;
+}
+
+.card-profile {
+  padding: 6px 24px;
+
+  p {
+    margin: 4px;
+  }
+
+  div a {
+    position: absolute;
+    right: 30px;
+  }
+}

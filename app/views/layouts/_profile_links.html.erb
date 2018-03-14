@@ -1,6 +1,6 @@
 <ul id="<%= data %>" class="dropdown-content">
-  <li><%= link_to 'Profilo', user_path(current_user) %></li>
-  <li><%= link_to 'Modifica profilo', edit_user_path(current_user) %></li>
+  <li><%= link_to 'Profilo', viewer_path(current_user) %></li>
+  <li><%= link_to 'Modifica profilo', edit_viewer_path(current_user) %></li>
   <li class="divider"></li>
   <li><%= link_to 'Modifica account', edit_user_registration_path %></li>
   <li class="divider"></li>
