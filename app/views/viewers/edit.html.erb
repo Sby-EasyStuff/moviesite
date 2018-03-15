@@ -1,0 +1,27 @@
+<h1>Edit your personal information</h1>
+
+<%= form_for(@viewer, as: :viewer, method: :patch, url: viewer_path(@viewer)) do |f| %>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :photo %>
+          <%= f.label :photo, "Inserisci l'URL della foto" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :name %>
+          <%= f.label :name %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="action">
+        <%= f.submit "Salva", class: "wave-effect wave-light btn blue accent-1" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
