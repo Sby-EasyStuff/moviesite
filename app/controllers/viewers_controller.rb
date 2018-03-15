@@ -1,4 +1,5 @@
 class ViewersController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :get_viewer, except: [:index]
   before_action :same_viewer, only: [:edit, :update]
 
