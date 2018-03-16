@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col s12 l9">
+    <div class="row center-align"><em><h4> <%= title %> </h4></em></div>
+    <div class="row">
+      <%= render 'movies_grid', size: 'l6' %>
+    </div>
+  </div>
+  <div class="col s12 l3">
+    <div class="row center-align">
+      <%= link_to 'Show all movies', movies_path %>
+    </div>
+    <div class="row center-align">
+      <div class="col s12 l6">
+	      <%= link_to 'Show all queries', queries_path %>
+      </div>
+      <div class="col s12 l6">
+	      <%= link_to 'Make a new search', new_query_path %>
+      </div>
+    </div>
+    <% @queries.each do |q| %>
+      <%= link_to query_path(q) do %>
+	<div class="chip">
+	  <%= q.query %>
+	</div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

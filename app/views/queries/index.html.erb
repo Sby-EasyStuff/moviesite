@@ -1,0 +1,13 @@
+<%= render 'query_search' %>
+
+<tbody>
+  <% @queries.each do |movie| %>
+    <tr>
+      <td><%= movie.query %></td>
+      <td><%= movie.movies %></td>
+      <td><%= link_to 'Show', movie %></td>
+      <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

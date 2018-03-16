@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312174219) do
+ActiveRecord::Schema.define(version: 20180316154638) do
+
+  create_table "movies", force: :cascade do |t|
+    t.integer "api_id"
+    t.string "title"
+    t.float "vote_average"
+    t.date "release_date"
+    t.text "overview"
+    t.string "poster_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_movies_on_api_id", unique: true
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.string "query"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.binary "movies"
+    t.index ["query"], name: "index_queries_on_query", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

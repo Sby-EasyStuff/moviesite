@@ -1,0 +1,13 @@
+<% if @query.errors.any? %>
+  <%= pluralize(@query.errors.count, "errore") %> provando ad aggiungere la nuov query
+  <% @query.errors.full_messages.each do |m| %>
+    <%= m %>
+  <% end %>
+<% end %>
+
+<%= form_with(model: @query, local:true) do |f|  %>
+  <%= f.text_field :query, id: 'query' %>
+  <%= f.label :query %>
+
+  <%= button_tag 'Search' %>
+<% end %>

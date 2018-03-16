@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  api_id: 
+  title: MyString
+  vote_average: 1.5
+  release_date: 2018-03-15
+  overview: MyText
+  url: MyString
+  poster_path: MyString
+
+two:
+  api_id: 
+  title: MyString
+  vote_average: 1.5
+  release_date: 2018-03-15
+  overview: MyText
+  url: MyString
+  poster_path: MyString

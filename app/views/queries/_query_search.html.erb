@@ -1,0 +1,10 @@
+<%= form_tag "/queries", method: "get" do %>
+  <%= search_field_tag :query %>
+  <%= label_tag :query %>
+
+  <%= button_tag do %>
+    Search
+  <% end %>
+<% end %>
+
+<%= link_to "Esegui una nuova ricerca esterna", new_query_path %>
