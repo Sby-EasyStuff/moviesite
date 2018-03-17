@@ -16,6 +16,15 @@
 
 @import 'materialize';
 
+.card img {
+    max-height: 300px;
+    object-fit: cover;
+}
+.card img.materialized.active {
+    max-height: none;
+    object-fit: none;
+}
+
 .alert {
   width: 100%;
   display: flex;

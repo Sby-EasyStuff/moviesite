@@ -1,5 +1,5 @@
 <% if @query.errors.any? %>
-  <%= pluralize(@query.errors.count, "errore") %> provando ad aggiungere la nuov query
+  <%= pluralize(@query.errors.count, "error") %> provando ad aggiungere la nuov query
   <% @query.errors.full_messages.each do |m| %>
     <%= m %>
   <% end %>

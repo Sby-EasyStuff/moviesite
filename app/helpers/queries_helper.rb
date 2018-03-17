@@ -17,6 +17,10 @@ module QueriesHelper
         query.movies = all_movies
 
         new_movies.each do |m|
+          if m["poster_path"] == nil || m["overview"] == nil  
+            break;
+          end
+
           movie = Movie.new(
             api_id: m["id"],
             title: m["title"],
