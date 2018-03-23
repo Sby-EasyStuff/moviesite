@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col s6">
+    <img class="responsive-image poster" src="<%= @movie.poster_path %>" alt="Poster film">
+  </div>
+  <div class="col s6">
+    <ul class="collection">
+      <li class="collection-item"><b><%= @movie.title %></b></li>
+      <li class="collection-item"><b>Valutazione:</b> <%= @movie.vote_average %></li>
+      <li class="collection-item"><b>Data di uscita:</b> <%= @movie.release_date %></li>
+      <li class="collection-item"><b>Link a TMDB:</b> <a href="<%= @movie.url %>"><%= @movie.url %></a></li>
+      <li class="collection-item"><b>Descrizione:</b> <%= @movie.overview %></li>
+    </ul>
+  </div>
+</div>

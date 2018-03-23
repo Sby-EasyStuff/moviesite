@@ -60,3 +60,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #Autenticazione con devise
 gem 'devise'
 gem 'omniauth-google-oauth2'
+
+# API requests
+gem 'httparty', '~> 0.13.7'

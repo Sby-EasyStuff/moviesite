@@ -1,0 +1,10 @@
+<%= render 'movies_search' %>
+<div class="row">
+  <div class="col s12">
+    <% if @movies.blank? %>
+      <h3>Nessun film trovato</h3>
+    <% else %>
+      <%= render 'movies_grid' %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  query: 1
+  movies: "[1, 2, 3]"
+# column: value
+#
+two:
+  query: 2
+  movies: "[4, 5, 6]"
+# column: value
