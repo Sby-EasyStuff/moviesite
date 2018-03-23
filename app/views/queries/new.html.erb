@@ -1,13 +1,26 @@
 <% if @query.errors.any? %>
-  <%= pluralize(@query.errors.count, "error") %> provando ad aggiungere la nuov query
+  <%= pluralize(@query.errors.count, "error") %> provando ad aggiungere la nuova query
   <% @query.errors.full_messages.each do |m| %>
     <%= m %>
   <% end %>
 <% end %>
 
 <%= form_with(model: @query, local:true) do |f|  %>
-  <%= f.text_field :query, id: 'query' %>
-  <%= f.label :query %>
-
-  <%= button_tag 'Search' %>
+  <div class="row">
+    <div class="col s12 input-field">
+      <%= f.text_field :query, id: 'query' %>
+      <%= f.label :query %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6 action">
+      <%= button_tag 'Search', class: "wave-light wave-effect btn blue accent-1" %>
+    </div>
+  </div>
 <% end %>
+<div class="row">
+  <div class="col s10">
+    <%= render 'movies_grid' %>
+  </div>
+  <%= render 'query_grid' %>
+</div>

@@ -1,48 +1,43 @@
 require 'test_helper'
 
 class MoviesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
     @movie = movies(:one)
   end
 
   test "should get index" do
-    get movies_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_movie_url
+    get movies_path
     assert_response :success
   end
 
   test "should create movie" do
+    sign_in users(:one)
     assert_difference('Movie.count') do
-      post movies_url, params: { movie: { api_id: @movie.api_id, overview: @movie.overview, poster_path: @movie.poster_path, release_date: @movie.release_date, title: @movie.title, url: @movie.url, vote_average: @movie.vote_average } }
+      post movies_url, params: { movie: {api_id: 15, title: 'Title', vote_average: 1.8, release_date: 2017-11-05, overview: 'Overvie', url: 'URL', poster_path: 'Poster_Path' } }
     end
 
     assert_redirected_to movie_url(Movie.last)
   end
 
-  test "should show movie" do
-    get movie_url(@movie)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_movie_url(@movie)
-    assert_response :success
-  end
-
-  test "should update movie" do
-    patch movie_url(@movie), params: { movie: { api_id: @movie.api_id, overview: @movie.overview, poster_path: @movie.poster_path, release_date: @movie.release_date, title: @movie.title, url: @movie.url, vote_average: @movie.vote_average } }
-    assert_redirected_to movie_url(@movie)
-  end
-
-  test "should destroy movie" do
-    assert_difference('Movie.count', -1) do
-      delete movie_url(@movie)
+  test "should not create movie if logged out" do
+    assert_no_difference('Movie.count') do
+      post movies_url, params: { movie: {api_id: 15, title: 'Title', vote_average: 1.8, release_date: 2017-11-05, overview: 'Overvie', url: 'URL', poster_path: 'Poster_Path' } }
     end
 
-    assert_redirected_to movies_url
+    assert_redirected_to new_user_session_path
   end
+
+
+  test "should show movie if logged in" do
+    sign_in users(:one)
+    get movie_path(@movie)
+    assert_response :success
+  end
+
+  test "should not show movie if not logged" do
+    get movie_path(@movie)
+    assert_response :redirect
+  end
+
 end

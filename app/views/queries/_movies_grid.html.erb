@@ -1,33 +1,26 @@
-<% @movies.each do |m| %>
-<div class="col s12 <%= size %>">
-  <div class="card small">
-    <div class="card-image waves-effect waves-block waves-light">
-      <% if m.poster_path.blank? %>
-      <!-- <%= image_tag "game_no_cover.jpg", class: "activator" %> -->
-      <% else %>
-      <img src="<%= m.poster_path.gsub(/t_thumb/, 't_720p') %>" alt="Photo of the game" class="activator"/>
-      <% end %>
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">
-        <div class="col s11 truncate">
-          <%= m.title %>
+<% if @movies.blank? %>
+  <h3>Nessun film aggiunto</h3>
+<% else %>
+  <h3>Film aggiunti di recente</h3>
+  <% @movies.each do |movie| %>
+    <div class="col s12 l4">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <% if movie.poster_path.blank? %>
+            <%= image_tag "no_poster.jpg", class:"activator" %>
+          <% else %>
+            <img class="activator" src="<%= movie.poster_path %>">
+          <% end %>
         </div>
-        <div class="col s1">
-          <i class="material-icons">more_vert</i>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4 truncate"><%= movie.title %><i class="material-icons right">more_vert</i></span>
+          <p><%= link_to "Link alla pagina", movie_path(movie.id) %></p>
         </div>
-      </span>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><%= movie.title %><i class="material-icons right">close</i></span>
+          <p><%= movie.overview %></p>
+        </div>
+      </div>
     </div>
-    <div class="card-action">
-      <%= link_to 'Show movie page', movie_path(m) %>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">
-        <%= m.title %>
-        <i class="material-icons right">close</i>
-      </span>
-      <p> <%= m.overview %> </p>
-    </div>
-  </div>
-</div>
+  <% end %>
 <% end %>

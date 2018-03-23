@@ -1,13 +1,13 @@
 <%= render 'query_search' %>
 
-<tbody>
-  <% @queries.each do |movie| %>
-    <tr>
-      <td><%= movie.query %></td>
-      <td><%= movie.movies %></td>
-      <td><%= link_to 'Show', movie %></td>
-      <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+<div class="row center-align">
+  <div class="col s12 l8">
+    <% if @queries.blank? %>
+      <em><h4>No queries to show.</h4></em>
+    <% else %>
+      <em><h5>Showing <%= pluralize(@queries.count, "query") %>.</h5></em>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'query_grid' %>

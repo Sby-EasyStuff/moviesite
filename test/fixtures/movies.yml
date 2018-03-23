@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  api_id: 
-  title: MyString
-  vote_average: 1.5
+  api_id: 1
+  title: Title
+  vote_average: 7.5
   release_date: 2018-03-15
-  overview: MyText
-  url: MyString
-  poster_path: MyString
+  overview: Overview
+  url: http://www.test.com
+  poster_path: http://www.poster.path
 
 two:
-  api_id: 
-  title: MyString
-  vote_average: 1.5
-  release_date: 2018-03-15
-  overview: MyText
-  url: MyString
-  poster_path: MyString
+  api_id: 2
+  title: Title
+  vote_average: 5.5
+  release_date: 2018-02-15
+  overview: Overview
+  url: http://www.test.com
+  poster_path: http://www.poster.path

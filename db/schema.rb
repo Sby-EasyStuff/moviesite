@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316154638) do
+ActiveRecord::Schema.define(version: 20180322154217) do
 
   create_table "movies", force: :cascade do |t|
     t.integer "api_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180316154638) do
     t.string "poster_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
     t.index ["api_id"], name: "index_movies_on_api_id", unique: true
   end
 

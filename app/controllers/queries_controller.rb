@@ -2,17 +2,12 @@ class QueriesController < ApplicationController
   include QueriesHelper
   before_action :authenticate_user!
 
-  def index
-    @queries = Query.all
-
-  end
-
   def show
     @query = Query.find_by_id(params[:id])
     if @query.blank?
       redirect_to queries_path, alert: "Query non trovata"
     end
-    @movies = Movie.where("api_id IN (?)", @query.movies)
+    map_movies(@query)
     last_queries
   end
 
@@ -45,13 +40,20 @@ class QueriesController < ApplicationController
     params.require(:query).permit(:query)
   end
 
+  def map_movies(query)
+      @movie_ids = query.movies[1, query.movies.length-2]
+      @movie_ids = @movie_ids.split(", ")
+      @movie_ids = @movie_ids.map{|m| m.to_i}
+      @movies = Movie.where("api_id IN (?)", @movie_ids)
+  end
+
   def last_movie
-    @movie = Movie.last(30).reverse
+    @movies = Movie.last(30).reverse
     last_queries
   end
 
   def last_queries
-      @queries = Query.last(50).reverse
+    @queries = Query.last(50).reverse
   end
 
 end
