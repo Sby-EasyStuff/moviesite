@@ -1,5 +1,5 @@
-<section id="comments" data-channel="comments" data-movie-id="<%= movie.id %>">
+<ul class="collection" id="comments" data-channel="comments" data-movie-id="<%= movie.id %>">
   <%= render movie.comments %>
-</section>
+</ul>
 
 <%= render 'comments/new', movie: movie %>
