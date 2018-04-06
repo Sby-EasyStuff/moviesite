@@ -15,6 +15,7 @@
 //= require jquery
 //= require turbolinks
 //= require materialize-sprockets
+//= require channels
 //= require_tree .
 
 $( document ).on('turbolinks:load', function() {
