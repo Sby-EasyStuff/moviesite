@@ -4,7 +4,7 @@
       <div class="input-field col s12">
         <%= form_for [ movie, Comment.new ], remote: true do |form| %>
           <%= form.text_area :body, class: "materialize-textarea" %><br>
-          <%= form.label :body %>
+          <%= form.label :"Scrivi un commento" %>
           <div class="row">
             <div class="action">
               <%= form.submit 'Commenta', class: "wave-effect wave-light btn blue accent-1" %>
