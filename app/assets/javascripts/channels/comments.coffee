@@ -2,7 +2,6 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
   collection: -> $("[data-channel='comments']")
 
   connected: ->
-    # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
     setTimeout =>
       @followCurrentMovie()
       @installPageChangeCallback()
