@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  include TrailersHelper
+
   before_action :authenticate_user!, except: [:index]
   before_action :set_movie, only: [:show, :edit, :update]
 
@@ -18,7 +20,10 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie = Movie.find_by_id(params[:id])
+    @movie = Movie.includes(:trailer).find_by_id(params[:id])
+    if @movie.trailer.blank?
+      @movie.trailer = search_trailer(@movie)
+    end
   end
 
   # POST /movies
@@ -48,4 +53,5 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:api_id, :title, :vote_average, :release_date, :overview, :url, :poster_path)
     end
+
 end

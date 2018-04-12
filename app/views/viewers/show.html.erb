@@ -3,30 +3,22 @@
 <% end %>
 
 <div class="row">
-  <div class="col s6">
-    <table class="responsive-table">
-      <tbody>
-        <tr>
-          <td><b>Nome:</b></td>
-          <td><%= @viewer.name %></td>
-        </tr>
-        <tr>
-          <td><b>Email:</b></td>
-          <td><%= @viewer.email %></td>
-        </tr>
-      </tbody>
-    </table>
-    <% if current_user == @viewer %>
-      <%= link_to "Edit", edit_viewer_path(current_user), class: "wave-light wave-effect btn blue accent-1" %>
-    <% end %>
-  </div>
   <% if !@viewer.photo.blank? %>
-  <div class="col s6">
+  <div class="col s12 l6">
     <div class="row">
       <div class="col s12">
-        <%= image_tag @viewer.photo, class: "responsive-image" %>
+        <%= image_tag @viewer.photo, class: "responsive-img" %>
       </div>
     </div>
   </div>
   <% end %>
+  <div class="col s12 l6">
+    <ul class="collection">
+      <li class="collection-item"><b>Nome: </b> <%= @viewer.name %> </li>
+      <li class="collection-item"><b>E-mail: </b> <%= @viewer.email %> </li>
+    </ul>
+    <% if current_user == @viewer %>
+      <%= link_to "Edit", edit_viewer_path(current_user), class: "wave-light wave-effect btn blue accent-1" %>
+    <% end %>
+  </div>
 </div>
