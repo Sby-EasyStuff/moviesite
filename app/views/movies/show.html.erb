@@ -7,6 +7,19 @@
       <li class="collection-item"><b><%= @movie.title %></b></li>
       <li class="collection-item"><b>Valutazione:</b> <%= @movie.vote_average %></li>
       <li class="collection-item"><b>Data di uscita:</b> <%= @movie.release_date %></li>
+      <% if @movie.release_date > Date.current() %>
+        <li class="collection-item">
+          <% if @event.blank? %>
+            <%= form_tag movie_create_path(@movie) do %>
+              <b>Aggiungi al calendario: </b>
+                <%= submit_tag 'Aggiungi evento', class: "wave-light wave-effect btn blue accent-1" %>
+            <% end %>
+          <% else %>
+              <b>Rimuovi evento dal calendario: </b>
+                <%= link_to 'Rimuovi evento', movie_destroy_path(@movie), method: :delete, class: "wave-light wave-effect btn blue accent-1" %>
+          <% end %>
+        </li>
+      <% end %>
       <li class="collection-item"><b>Link a TMDB:</b> <a href="<%= @movie.url %>"><%= @movie.url %></a></li>
       <li class="collection-item"><b>Descrizione:</b> <%= @movie.overview %></li>
     </ul>

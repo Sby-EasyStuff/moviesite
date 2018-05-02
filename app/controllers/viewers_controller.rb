@@ -1,6 +1,6 @@
 class ViewersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :get_viewer, except: [:index]
+  before_action :get_viewer, except: [:index, :events]
   before_action :same_viewer, only: [:edit, :update]
 
   def index
@@ -8,6 +8,14 @@ class ViewersController < ApplicationController
   end
 
   def show
+    @events = Event.includes(:movie).where("user_id = ? ", @viewer.id)
+  end
+
+  def events
+    @events = Event.includes(:movie).where("user_id = ? ", params[:viewer_id])
+    @future = @events.map{ |e| e.movie unless (e.movie.release_date < Date.today) }
+    @past = @events.map{ |e| e.movie unless (e.movie.release_date > Date.today) }
+    render 'events'
   end
 
   def edit

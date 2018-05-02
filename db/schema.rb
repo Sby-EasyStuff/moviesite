@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322154217) do
+ActiveRecord::Schema.define(version: 20180502085612) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_comments_on_movie_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "api_id"
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_events_on_movie_id"
+    t.index ["user_id", "movie_id"], name: "index_events_on_user_id_and_movie_id", unique: true
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.integer "api_id"
@@ -31,6 +52,15 @@ ActiveRecord::Schema.define(version: 20180322154217) do
     t.datetime "updated_at", null: false
     t.binary "movies"
     t.index ["query"], name: "index_queries_on_query", unique: true
+  end
+
+  create_table "trailers", force: :cascade do |t|
+    t.string "api_id"
+    t.integer "movie_id"
+    t.string "thumbnail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_trailers_on_movie_id"
   end
 
   create_table "users", force: :cascade do |t|
