@@ -31,4 +31,7 @@
       </ul>
     <% end %>
   </div>
+  <% if (@past.all? &:blank?) && (@future.all? &:blank?) %>
+    <h2>Non ci sono eventi in programma</h2>
+  <% end %>
 </div>
