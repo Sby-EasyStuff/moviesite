@@ -4,9 +4,8 @@
   </div>
 </div>
 
-<% @viewers.each do |viewer| %>
-
-  <div class="row">
+<div class="row">
+  <% @viewers.each do |viewer| %>
     <div class="col s12 l4">
       <div class="card blue-grey lighten-1">
         <div class="card-content white-text">
@@ -17,7 +16,13 @@
               <img src="<%= viewer.photo %>" alt="Foto profilo" class="circle responsive-image card-profile-image">
             <% end %>
           </div>
-          <span class="card-title"><%= viewer.name %></span>
+          <span class="card-title">
+            <% if viewer.name.blank? %>
+              Anonimo
+            <% else %>
+              <%= viewer.name %>
+            <% end %>
+          </span>
             <p><i>Email: </i><%= viewer.email %></p>
         </div>
         <div class="card-action">
@@ -25,6 +30,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-<% end %>
+  <% end %>
+</div>

@@ -5,7 +5,10 @@
     <h5>Ricerce recenti</h5>
     <% @queries.each do |q| %>
       <%= link_to query_path(q) do %>
-        <p><%= q.query %></p>
+        <div class="chip truncate">
+          <%= q.query %>
+        </div>
+
       <% end %>
     <% end %>
   <% end %>

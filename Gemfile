@@ -60,6 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #Autenticazione con devise
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 # API requests
 gem 'httparty', '~> 0.13.7'

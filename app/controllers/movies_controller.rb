@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
 
   before_action :authenticate_user!, except: [:index]
   before_action :set_movie, only: [:show, :edit, :update]
+  before_action :get_event, only: [:show]
 
   # GET /movies
   # GET /movies.json
@@ -47,6 +48,10 @@ class MoviesController < ApplicationController
     def set_movie
       @movie = Movie.find(params[:id])
       redirect_to movies_path, alert: 'Il film non è stato trovato' unless @movie
+    end
+
+    def get_event
+      @event = Event.where("user_id = ? AND movie_id = ? ", current_user.id, @movie.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
