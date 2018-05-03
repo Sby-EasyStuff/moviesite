@@ -4,6 +4,7 @@
 
 <div class="row">
   <div class="col s6">
+    <h3>Informazioni utente</h3>
     <table class="responsive-table">
       <tbody>
         <tr>
@@ -31,20 +32,22 @@
   <% end %>
 </div>
 
-<h4>I miei eventi:</h4>
+<% if !@event.blank? %>
+  <h4>I miei eventi:</h4>
 
-<div class="row">
-  <div class="col s12">
-    <ul class="collection">
-      <% @events.each do |event| %>
-        <li class="collection-item">
-          <b><%= event.movie.title %> </b>(<%= event.movie.release_date %>)
-          <%= link_to movie_destroy_path(event.movie.id), method: :delete do %>
-            <i class="material-icons right">delete_forever</i>
+  <div class="row">
+    <div class="col s12">
+      <ul class="collection">
+        <% @events.each do |event| %>
+          <li class="collection-item">
+            <b><%= event.movie.title %> </b>(<%= event.movie.release_date %>)
+            <%= link_to movie_destroy_path(event.movie.id), method: :delete do %>
+              <i class="material-icons right">delete_forever</i>
+            <% end %>
           <% end %>
-        <% end %>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
-<%= link_to 'Mostra eventi', viewer_events_path(@viewer), class: "wave-light wave-effect btn blue accent-1" %>
+  <%= link_to 'Mostra eventi', viewer_events_path(@viewer), class: "wave-light wave-effect btn blue accent-1" %>
+<% end %>

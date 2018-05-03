@@ -1,6 +1,8 @@
 class CalendarsController < ApplicationController
   before_action :set_movie, only: [:create, :destroy]
   before_action :set_event, only: [:destroy]
+  before_action :set_session, only: [:create, :destroy]
+
   @@movie = 0
 
   def redirect
@@ -17,9 +19,11 @@ class CalendarsController < ApplicationController
 
     session[:authorization] = response
 
-    redirect_to movie_path(@@movie.id)
+    puts([:return_to])
+
+    redirect_to session.delete(:return_to)
   end
-  
+
   def create
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
@@ -42,16 +46,16 @@ class CalendarsController < ApplicationController
     if @new_event.status == "confirmed"
       @event = Event.new(api_id: @new_event.id, user_id: current_user.id, movie_id: @@movie.id)
       if @event.save
-        redirect_to movie_path(@@movie.id), notice: "Evento aggiunto con successo!"
+        redirect_to session.delete(:return_to), notice: "Evento aggiunto con successo!"
         return
       end
-      redirect_to movie_path(@@movie.id), alert: "Errore aggiunta evento!"
+      redirect_to session.delete(:return_to), alert: "Errore aggiunta evento!"
       return
     end
 
   rescue Google::Apis::ClientError => e
     puts(e)
-    redirect_to movie_path(@@movie.id), alert: "Errore aggiunta evento!"
+    redirect_to session.delete(:return_to), alert: "Errore aggiunta evento!"
     return
 
   rescue ArgumentError
@@ -70,12 +74,15 @@ class CalendarsController < ApplicationController
 
     if @delete_event.blank?
       @event.destroy
-      redirect_to movie_path(@@movie.id), notice: "Evento eliminato con successo!"
+
+      puts(session[:return_to])
+
+      redirect_to session.delete(:return_to), notice: "Evento eliminato con successo!"
     end
 
   rescue Google::Apis::ClientError => e
     puts(e)
-    redirect_to movie_path(@@movie.id), alert: "Errore rimozione evento!"
+    redirect_to session.delete(:return_to), alert: "Errore rimozione evento!"
     return
 
   rescue Google::Apis::AuthorizationError
@@ -100,13 +107,18 @@ class CalendarsController < ApplicationController
     }
   end
 
+  def set_session
+    session[:return_to] ||= request.referer
+    puts(session[:return_to])
+  end
+
   def set_event
     @event = Event.where("user_id = ? AND movie_id = ?", current_user.id, @@movie.id).first
-    redirect_to movies_path, alert: 'Il film non è stato trovato' unless @@movie
+    redirect_to session.delete(:return_to), alert: 'Il film non è stato trovato' unless @@movie
   end
 
   def set_movie
     @@movie = Movie.find_by_id(params[:movie_id])
-    redirect_to movies_path, alert: 'Il film non è stato trovato' unless @@movie
+    redirect_to session.delete(:return_to), alert: 'Il film non è stato trovato' unless @@movie
   end
 end

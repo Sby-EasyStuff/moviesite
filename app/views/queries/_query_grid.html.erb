@@ -1,11 +1,11 @@
-<div class="col s2">    
+<div class="col s2">
   <% if @queries.blank? %>
     <h5>Nessuna ricerca eseguita</h5>
   <% else %>
     <h5>Ricerce recenti</h5>
     <% @queries.each do |q| %>
       <%= link_to query_path(q) do %>
-        <div class="chip">
+        <div class="chip truncate">
           <%= q.query %>
         </div>
       <% end %>

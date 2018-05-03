@@ -13,8 +13,8 @@ class ViewersController < ApplicationController
 
   def events
     @events = Event.includes(:movie).where("user_id = ? ", params[:viewer_id])
-    @future = @events.map{ |e| e.movie unless (e.movie.release_date < Date.today) }
-    @past = @events.map{ |e| e.movie unless (e.movie.release_date > Date.today) }
+    @future = @events.map{ |e| e.movie unless (e.movie.release_date < Date.today) }.compact
+    @past = @events.map{ |e| e.movie unless (e.movie.release_date > Date.today) }.compact
     render 'events'
   end
 
