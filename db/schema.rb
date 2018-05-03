@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20180406141820) do
 
   create_table "comments", force: :cascade do |t|
@@ -41,6 +42,15 @@ ActiveRecord::Schema.define(version: 20180406141820) do
     t.datetime "updated_at", null: false
     t.binary "movies"
     t.index ["query"], name: "index_queries_on_query", unique: true
+  end
+
+  create_table "trailers", force: :cascade do |t|
+    t.string "api_id"
+    t.integer "movie_id"
+    t.string "thumbnail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_trailers_on_movie_id"
   end
 
   create_table "users", force: :cascade do |t|
