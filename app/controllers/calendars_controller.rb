@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_movie, only: [:create, :destroy]
   before_action :set_event, only: [:destroy]
   before_action :set_session, only: [:create, :destroy]
@@ -19,9 +20,11 @@ class CalendarsController < ApplicationController
 
     session[:authorization] = response
 
-    puts([:return_to])
-
-    redirect_to session.delete(:return_to)
+    if !session[:return_to].nil?
+      redirect_to session.delete(:return_to)
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -53,41 +56,26 @@ class CalendarsController < ApplicationController
       return
     end
 
-  rescue Google::Apis::ClientError => e
-    puts(e)
-    redirect_to session.delete(:return_to), alert: "Errore aggiunta evento!"
-    return
-
   rescue ArgumentError
     redirect_to redirect_path
     return
   end
 
   def destroy
+
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-
+    @get_event = service.get_event('primary', @event.api_id)
     @delete_event = service.delete_event('primary', @event.api_id)
 
     if @delete_event.blank?
       @event.destroy
 
-      puts(session[:return_to])
-
       redirect_to session.delete(:return_to), notice: "Evento eliminato con successo!"
     end
-
-  rescue Google::Apis::ClientError => e
-    puts(e)
-    redirect_to session.delete(:return_to), alert: "Errore rimozione evento!"
-    return
-
-  rescue Google::Apis::AuthorizationError
-    redirect_to redirect_path
-    return
 
   rescue ArgumentError
     redirect_to redirect_path
@@ -107,9 +95,29 @@ class CalendarsController < ApplicationController
     }
   end
 
+  def client_error_handling(error)
+     puts(error.status_code)
+     case error.status_code
+     when 400
+       redirect_to session.delete(:return_to), alert: "Errore nei parametri della richiesta"
+     when 403
+       redirect_to session.delete(:return_to), alert: "Limite richieste giornaliere raggiunto"
+     when 404
+       @event.destroy
+       redirect_to session.delete(:return_to), notice: "Evento eliminato con successo"
+     else
+       redirect_to session.delete(:return_to), alert: "Errore rimozione evento!"
+     end
+     return
+  end
+
+  def oauth_error_handling(error)
+    redirect_to redirect_path
+    return
+  end
+
   def set_session
     session[:return_to] ||= request.referer
-    puts(session[:return_to])
   end
 
   def set_event
