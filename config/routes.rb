@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :movies do
     post 'calendars', to: 'calendars#create', as: 'create'
     delete 'calendars', to: 'calendars#destroy', as: 'destroy'
+    resources :comments
   end
+  
   resources :viewers, only: [:index, :show, :edit, :update]
   resources :viewers do
     get :events

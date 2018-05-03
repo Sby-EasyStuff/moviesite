@@ -1,8 +1,16 @@
+<% if @movie.trailer.errors.any? %>
+  <%= pluralize(@movie.trailer.errors.count, "error") %> provando ad aggiungere la nuova query
+  <% @movie.trailer.errors.full_messages.each do |m| %>
+    <%= m %>
+  <% end %>
+<% end %>
+
+
 <div class="row">
-  <div class="col s6">
-    <img class="responsive-image poster" src="<%= @movie.poster_path %>" alt="Poster film">
+  <div class="col s12 l6">
+    <img class="responsive-img poster" src="<%= @movie.poster_path %>" alt="Poster film">
   </div>
-  <div class="col s6">
+  <div class="col s12 l6">
     <ul class="collection">
       <li class="collection-item"><b><%= @movie.title %></b></li>
       <li class="collection-item"><b>Valutazione:</b> <%= @movie.vote_average %></li>
@@ -22,6 +30,16 @@
       <% end %>
       <li class="collection-item"><b>Link a TMDB:</b> <a href="<%= @movie.url %>"><%= @movie.url %></a></li>
       <li class="collection-item"><b>Descrizione:</b> <%= @movie.overview %></li>
+      <li class="collection-item"><b>Trailer:</b>
+        <div class="video-container responsive-video">
+          <iframe src="https://www.youtube.com/embed/<%= @movie.trailer.api_id %>?autoplay=1"></iframe>
+        </div>
+      </li>
     </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <%= render 'comments/comments', movie: @movie %>
   </div>
 </div>
