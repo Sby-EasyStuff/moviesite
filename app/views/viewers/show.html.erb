@@ -9,7 +9,11 @@
       <tbody>
         <tr>
           <td><b>Nome:</b></td>
-          <td><%= @viewer.name %></td>
+          <% if @viewer.name.blank? %>
+            <td>Anonimo</td>
+          <% else %>
+            <td><%= @viewer.name %></td>
+          <% end %>
         </tr>
         <tr>
           <td><b>Email:</b></td>
