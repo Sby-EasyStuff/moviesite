@@ -1,3 +1,4 @@
+require 'bunny'
 class QueriesController < ApplicationController
   include QueriesHelper
   before_action :authenticate_user!
@@ -26,6 +27,13 @@ class QueriesController < ApplicationController
       @query = search_query(@query)
       @query.query.downcase!
       if !@query.errors.any? && @query.save
+        conn = Bunny.new ENV['CLOUDAMQP_URL']
+        conn.start
+        ch = conn.create_channel
+        x = ch.fanout("movies_update")
+        x.publish("#{current_user.id}")
+        ch.close
+        conn.close
         redirect_to @query, notice: 'Una nuova query è stata aggiunta al database'
       else
         last_movie

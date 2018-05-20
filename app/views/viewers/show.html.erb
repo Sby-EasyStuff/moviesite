@@ -24,6 +24,7 @@
        </li>
       <li class="collection-item"><b>E-mail: </b> <%= @viewer.email %> </li>
     </ul>
+    <%= link_to "Iscriviti", viewer_subscribers_path(@viewer), method: :post, class: "wave-light wave-effect btn blue accent-1" %>
     <% if current_user == @viewer %>
       <%= link_to "Edit", edit_viewer_path(current_user), class: "wave-light wave-effect btn blue accent-1" %>
     <% end %>

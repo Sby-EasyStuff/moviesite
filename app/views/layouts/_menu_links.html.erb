@@ -1,10 +1,17 @@
+<li>
+  <a href="<%= query_path(Query.last) %>">Nuovi film
+    <% if !@last_movies.blank? %>
+      <span class="new badge"><%= @last_movies.count %></span>
+    <% end %>
+  </a>
+</li>
 <li><%= link_to 'Cerca', new_query_path %></li>
 <li><%= link_to 'Utenti', viewers_path %></li>
 <li><%= link_to 'Film', movies_path %></li>
 <% if user_signed_in? %>
   <li>
     <a class="dropdown-button" href="#!" data-activates="<%= data %>">
-      <%= current_user.name.blank? ? "Your profile" : current_user.name.split.map(&:capitalize).join(" ") %>
+      <%= current_user.name.blank? ? "Profilo" : current_user.name.split.map(&:capitalize).join(" ") %>
       <i class="material-icons right">arrow_drop_down</i>
     </a>
   </li>

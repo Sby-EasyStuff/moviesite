@@ -1,9 +1,7 @@
 module QueriesHelper
   require 'httparty'
     # tmdb key to make api calls
-    #@@api_key = ENV['TMDB_KEY']
-
-    @@api_key = "e70f1fb9d85e262a61e6ffb5834e144a"
+    @@api_key = ENV['TMDB_KEY']
 
     def search_query(query)
       uri = "https://api.themoviedb.org/3/search/movie?query=#{query.query}&api_key=#{@@api_key}&language=it&page=1&include_adult=false"
