@@ -64,3 +64,6 @@ gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 # API requests
 gem 'httparty', '~> 0.13.7'
+
+#AMPQ
+gem 'bunny'

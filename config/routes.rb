@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     delete 'calendars', to: 'calendars#destroy', as: 'destroy'
     resources :comments
   end
-  
+
   resources :viewers, only: [:index, :show, :edit, :update]
   resources :viewers do
+    resources :subscribers
     get :events
   end
 
