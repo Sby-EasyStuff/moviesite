@@ -21,6 +21,21 @@ class SubscribersController < ApplicationController
     end
   end
 
+  def destroy
+    @subscriber = Subscriber.find_by_id(params[:id])
+    if @subscriber.destroy
+      connection = Bunny.new ENV['CLOUDAMQP_URL']
+      connection.start
+
+      channel = connection.create_channel
+      queue = channel.queue("#{current_user.id}")
+      queue.delete
+      channel.close
+      connection.close
+      redirect_to viewer_path(current_user), notice: 'Non riceverai notifiche '
+    end
+  end
+
   private
   def subscriber_params
     params.require(:subscriber).permit(:user_id)

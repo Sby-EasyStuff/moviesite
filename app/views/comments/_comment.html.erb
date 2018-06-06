@@ -4,5 +4,9 @@
   <% else %>
     <img src="<%= comment.user.photo %>" alt="Foto profilo" class="circle responsive-image card-profile-image">
   <% end %>
-  <b><%= comment.user.email %>: </b><%= comment.body %>
+  <% if comment.user.name.blank? %>
+    <b>Anonimo: </b><%= comment.body %>
+  <% else %>
+    <b><%= comment.user.name %>: </b><%= comment.body %>
+  <% end %>
 </li>

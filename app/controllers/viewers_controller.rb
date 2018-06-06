@@ -9,6 +9,7 @@ class ViewersController < ApplicationController
 
   def show
     @events = Event.includes(:movie).where("user_id = ? ", @viewer.id)
+    @subscriber = Subscriber.find_by("user_id = ?", @viewer.id)
   end
 
   def events

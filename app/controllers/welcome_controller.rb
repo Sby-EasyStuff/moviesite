@@ -11,6 +11,7 @@ class WelcomeController < ApplicationController
 
       begin
         queue.subscribe(block: false) do |delivery_info, properties, body|
+          puts("Recevied")
           map_last_movies(Query.last) unless body.to_i == current_user.id
         end
         channel.close

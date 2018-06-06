@@ -26,7 +26,7 @@ class QueriesController < ApplicationController
       # Make query to api => set of movie
       @query = search_query(@query)
       @query.query.downcase!
-      if !@query.errors.any? && @query.save
+      if !@query.movies.blank? && !@query.errors.any? && @query.save
         conn = Bunny.new ENV['CLOUDAMQP_URL']
         conn.start
         ch = conn.create_channel
@@ -37,6 +37,7 @@ class QueriesController < ApplicationController
         redirect_to @query, notice: 'Una nuova query è stata aggiunta al database'
       else
         last_movie
+        flash.now[:alert] = "Nessun film trovato con questo titolo"
         render :new
       end
     end
