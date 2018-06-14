@@ -1,24 +1,51 @@
-# README
+# Movie Site
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Movie site è un database di film che permette agli utenti di aggiungere promemoria per i film in uscita
+---
 
-Things you may want to cover:
+### Esperienza utente
 
-* Ruby version
+- Utenti non autenticati
+  - Possono visualizzare solo l'homepage e le pagine con gli elenchi di film, utenti e ultime ricerche
+- Utenti autenticati
+  - Possono commentare i vari film
+  - Aggiungere promemoria per i film in uscita
+  - Visualizzare le informazioni degli altri Utenti
+  - Cercare/aggiungere nuovi film al database
+---
 
-* System dependencies
+### Specifiche tecniche
 
-* Configuration
+Il framework utilizzato è `Ruby on Rails`.
+Per testare l'applicazione in locale si devono seguire questi passi:
 
-* Database creation
+- installare Ruby on Rails
 
-* Database initialization
+- dal terminale
+    - `nano ~/.bashrc`
+    - aggiungere in fondo al file:
+      - export GOOGLE_APP_ID= **CLIENT_ID**
+      - export GOOGLE_APP_SECRET= **CLIENT_SECRET**
+      - export TMDB_KEY= **TMDB_API_ID**
+      - export CLOUDAMQP_URL= **CLOUDAMQP_ID**
+    - `bundle install`
+    - `rails db:migrate`
+    - `rails s`
 
-* How to run the test suite
+> Dove **CLIENT_ID** e **CLIENT_SECRET** si ottengono registrandosi su [Google Developer Console](https://console.developers.google.com)
+> **TMDB_API_ID** si ottiene registrandosi su [The Movie DB](https://www.themoviedb.org/documentation/api)
+> **CLOUDAMQP_ID** si ottiene registrandosi su [Cloud AMPQ](https://www.cloudamqp.com/)
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+---
 
-* ...
+### API REST
+
+- Autenticazione
+    + [Google Plus API](https://developers.google.com/+/web/api/rest/)
+- Caricamento trailer
+    + [YouTube API](https://developers.google.com/youtube/v3/getting-started)
+- Database film
+    + [The Movie DB](https://www.themoviedb.org/documentation/api)
+- Calendario promemoria
+    + [Google Calendar API](https://developers.google.com/calendar/overview)
