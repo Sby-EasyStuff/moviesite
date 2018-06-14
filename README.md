@@ -27,14 +27,15 @@ Per testare l'applicazione in locale si devono seguire questi passi:
       - export GOOGLE_APP_ID= **CLIENT_ID**
       - export GOOGLE_APP_SECRET= **CLIENT_SECRET**
       - export TMDB_KEY= **TMDB_API_ID**
-      - export CLOUDAMQP_URL= **CLOUDAMQP_ID**
+      - export YT_KEY= **YOUTUBE_KEY_ID**
+      - export CLOUDAMQP_URL= **AMQP_URL**
     - `bundle install`
     - `rails db:migrate`
     - `rails s`
 
-> Dove **CLIENT_ID** e **CLIENT_SECRET** si ottengono registrandosi su [Google Developer Console](https://console.developers.google.com)
-> **TMDB_API_ID** si ottiene registrandosi su [The Movie DB](https://www.themoviedb.org/documentation/api)
-> **CLOUDAMQP_ID** si ottiene registrandosi su [Cloud AMPQ](https://www.cloudamqp.com/)
+> Dove **CLIENT_ID**, **CLIENT_SECRET** e **YOUTUBE_KEY_ID** si ottengono registrandosi su [Google Developer Console](https://console.developers.google.com),
+> **TMDB_API_ID** si ottiene registrandosi su [The Movie DB](https://www.themoviedb.org/documentation/api),
+> **AMQP_URL** si ottiene registrandosi su [Cloud AMPQ](https://www.cloudamqp.com/).
 
 
 ---

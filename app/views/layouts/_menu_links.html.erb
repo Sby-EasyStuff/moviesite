@@ -1,9 +1,7 @@
 <li>
-  <% if !Query.last.blank? %>
+  <% if !Query.last.blank? && !@last_movies.blank? %>
     <a href="<%= query_path(Query.last) %>">Nuovi film
-      <% if !@last_movies.blank? %>
-        <span class="new badge"><%= @last_movies.count %></span>
-      <% end %>
+      <span class="new badge"><%= @last_movies.count %></span>
     </a>
   <% end %>
 </li>

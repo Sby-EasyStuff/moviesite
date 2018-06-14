@@ -1,9 +1,9 @@
 module TrailersHelper
   require 'httparty'
     # tmdb key to make api calls
-    #@@api_key = ENV['YT_KEY']
+    @@api_key = ENV['YT_KEY']
 
-    @@api_key = "AIzaSyDBvEmsIW5pAn2JSdHd4UjAGrK0Obovjos"
+    #@@api_key = "AIzaSyDBvEmsIW5pAn2JSdHd4UjAGrK0Obovjos"
 
     def search_trailer(movie)
 
@@ -20,6 +20,8 @@ module TrailersHelper
         resp = HTTParty.get(uri, headers: {"Accept" => "application/json"})
         resp.inspect
 
+        puts(resp)
+        
         trailer = filter_result(resp["items"])
 
         trailer = Trailer.new(
